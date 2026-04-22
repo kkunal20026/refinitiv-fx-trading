@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: refinitiv-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: refinitiv_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - refinitiv-network
+
+  server:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: refinitiv-server
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_DBNAME: refinitiv_db
+      REFINITIV_USERNAME: ${REFINITIV_USERNAME}
+      REFINITIV_PASSWORD: ${REFINITIV_PASSWORD}
+      LOGGER_LEVEL: info
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - refinitiv-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  postgres_data:
+
+networks:
+  refinitiv-network:
+    driver: bridge

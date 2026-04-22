@@ -1,0 +1,36 @@
+server:
+  port: 8080
+  environment: development
+  read_timeout: 30s
+  write_timeout: 30s
+  shutdown_timeout: 15s
+
+database:
+  driver: postgres
+  host: localhost
+  port: 5432
+  user: postgres
+  password: postgres
+  dbname: refinitiv_db
+  sslmode: disable
+  max_open_conns: 25
+  max_idle_conns: 5
+  conn_max_lifetime: 5m
+
+logger:
+  level: info
+  encoding: json
+  output_path: stdout
+
+refinitiv:
+  base_url: https://api.refinitiv.com
+  username: ${REFINITIV_USERNAME}
+  password: ${REFINITIV_PASSWORD}
+  timeout: 30s
+  max_retries: 3
+  retry_backoff: 1s
+
+auth:
+  api_key_header: X-API-Key
+  jwt_secret: ${JWT_SECRET}
+  token_expiry: 24h

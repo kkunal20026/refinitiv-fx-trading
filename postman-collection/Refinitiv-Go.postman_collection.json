@@ -1,0 +1,205 @@
+{
+  "info": {
+    "_postman_id": "09cb5544-2de6-4327-8185-def315d05fa5",
+    "name": "Refinitiv-Go",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2748949",
+    "_collection_link": "https://go.postman.co/collection/2748949-09cb5544-2de6-4327-8185-def315d05fa5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Generated from cURL: curl http://localhost:8080/health\r\n"
+      },
+      "response": []
+    },
+    {
+      "name": "Rates",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/rates?from=EUR&to=USD",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "rates"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "EUR"
+            },
+            {
+              "key": "to",
+              "value": "USD"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl http://localhost:8080/api/v1/rates\r\n"
+      },
+      "response": []
+    },
+    {
+      "name": "Deal",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"client_id\": \"CLIENT-001\",\r\n  \"from_currency\": \"EUR\",\r\n  \"to_currency\": \"USD\",\r\n  \"amount\": 100000,\r\n  \"direction\": \"BUY\",\r\n  \"value_date\": \"2026-04-25T00:00:00Z\",\r\n  \"reference\": \"REF-001\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/deals",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "deals"
+          ]
+        },
+        "description": "Generated from cURL: curl -X POST http://localhost:8080/api/v1/deals \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\r\n    \"currency_pair\": \"EUR/USD\",\r\n    \"side\": \"BUY\",\r\n    \"notional_amount\": 100000,\r\n    \"notional_currency\": \"EUR\"\r\n  }'\r\n"
+      },
+      "response": []
+    },
+    {
+      "name": "List All Deals",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/deals?client_id=CLIENT-001",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "deals"
+          ],
+          "query": [
+            {
+              "key": "client_id",
+              "value": "CLIENT-001"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl http://localhost:8080/api/v1/deals\r\n"
+      },
+      "response": []
+    },
+    {
+      "name": "Deal-Client Id-Query Param",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/deals/aa638333-7fcb-431a-a81b-04f78f1c7dde",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "deals",
+            "aa638333-7fcb-431a-a81b-04f78f1c7dde"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deal-Put",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/deals/b1b172a5-4a71-4e57-a18b-e404f53bd508/status?status=CONFIRMED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "deals",
+            "b1b172a5-4a71-4e57-a18b-e404f53bd508",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CONFIRMED"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
